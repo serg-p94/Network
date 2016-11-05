@@ -12,13 +12,13 @@ namespace Network.Core
     class Server
     {
         private readonly TcpListener _tcpListener;
-        private readonly BinaryFormatter _binaryFormatter;
+        private readonly Serializer _serializer;
         private TcpClient _tcpClient;
 
         public Server()
         {
             _tcpListener = TcpListener.Create(NetworkConfig.Port);
-            _binaryFormatter = new BinaryFormatter();
+            _serializer = new Serializer();
         }
 
         public async void Start()
@@ -33,12 +33,12 @@ namespace Network.Core
             {
                 using (var stream = _tcpClient.GetStream())
                 {
-                    var request = (Request)_binaryFormatter.Deserialize(stream);
+                    var request = (Request)await _serializer.DeserializeAsync(stream);
                     // *******
                     // Do smth
                     // *******
                     var response = new Response();
-                    _binaryFormatter.Serialize(stream, response);
+                    await _serializer.SerializeAsync(stream, response);
                 }
             }
         }
