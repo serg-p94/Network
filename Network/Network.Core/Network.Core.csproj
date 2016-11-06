@@ -40,13 +40,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
+    <Compile Include="ClientRequestProcessor.cs" />
+    <Compile Include="CommunicationUnit.cs" />
+    <Compile Include="Intefaces\IRequestProcessor.cs" />
     <Compile Include="NetworkConfig.cs" />
-    <Compile Include="NetworkMessage.cs" />
+    <Compile Include="Models\NetworkMessage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Request.cs" />
-    <Compile Include="Response.cs" />
+    <Compile Include="Models\Request.cs" />
+    <Compile Include="Models\Response.cs" />
     <Compile Include="Serializer.cs" />
     <Compile Include="Server.cs" />
+    <Compile Include="ServerRequestProcessor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

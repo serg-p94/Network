@@ -1,45 +1,31 @@
-﻿using System;
+﻿using System.Net.Sockets;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Sockets;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
 
 namespace Network.Core
 {
-    class Server
+    public class Server
     {
         private readonly TcpListener _tcpListener;
-        private readonly Serializer _serializer;
-        private TcpClient _tcpClient;
+
+        private List<CommunicationUnit> _clients;
+
+        public bool IsWorking { get; private set; }
 
         public Server()
         {
             _tcpListener = TcpListener.Create(NetworkConfig.Port);
-            _serializer = new Serializer();
+            _clients = new List<CommunicationUnit>();
         }
 
         public async void Start()
         {
-            _tcpClient = await _tcpListener.AcceptTcpClientAsync();
-            
-        }
-
-        private async Task WorkingProc()
-        {
-            while (_tcpClient.Connected)
+            IsWorking = true;
+            while (IsWorking)
             {
-                using (var stream = _tcpClient.GetStream())
-                {
-                    var request = (Request)await _serializer.DeserializeAsync(stream);
-                    // *******
-                    // Do smth
-                    // *******
-                    var response = new Response();
-                    await _serializer.SerializeAsync(stream, response);
-                }
+                var tcpClient = await _tcpListener.AcceptTcpClientAsync();
+                var unit = new CommunicationUnit(tcpClient, new ServerRequestProcessor());
+                _clients.Add(unit);
+                unit.Start();
             }
         }
     }

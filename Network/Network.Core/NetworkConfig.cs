@@ -8,6 +8,7 @@ namespace Network.Core
 {
     public  static class NetworkConfig
     {
+        public const string LocalHost = "localhost";
         public const int Port = 3333;
     }
 }
