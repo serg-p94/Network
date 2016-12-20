@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace Network.Core
 {
-    public class CommunicationUnit
-    {
+   public class CommunicationUnit
+   {
         private readonly TcpClient _tcpClient;
         private readonly IRequestProcessor _requestProcessor;
         private readonly Serializer _serializer;
@@ -37,5 +37,5 @@ namespace Network.Core
                 }
             }
         }
-    }
+   }
 }

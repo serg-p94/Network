@@ -6,7 +6,7 @@ namespace Network.Core
     {
         private CommunicationUnit _communicationUnit;
 
-        public async void Start()
+        public void Start()
         {
             var tcpClient = new TcpClient(NetworkConfig.LocalHost, NetworkConfig.Port);
             _communicationUnit = new CommunicationUnit(tcpClient, new ClientRequestProcessor());

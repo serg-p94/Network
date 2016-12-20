@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DD27C76C-6E3D-4AC2-A5FD-C28FD3299013}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{15B61D4D-550C-4620-BA05-F0B824A1F537}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Network.Core</RootNamespace>
-    <AssemblyName>Network.Core</AssemblyName>
+    <RootNamespace>Network.UI.ConsoleServer</RootNamespace>
+    <AssemblyName>Network.UI.ConsoleServer</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,21 +43,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Client.cs" />
-    <Compile Include="RequestProcessors\ClientRequestProcessor.cs" />
-    <Compile Include="CommunicationUnit.cs" />
-    <Compile Include="Intefaces\IRequestProcessor.cs" />
-    <Compile Include="NetworkConfig.cs" />
-    <Compile Include="Models\NetworkMessage.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Models\Request.cs" />
-    <Compile Include="Models\Response.cs" />
-    <Compile Include="Converters\Serializer.cs" />
-    <Compile Include="RequestProcessors\LambdaRequestProcessor.cs" />
-    <Compile Include="Server.cs" />
-    <Compile Include="RequestProcessors\ServerRequestProcessor.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Network.Core\Network.Core.csproj">
+      <Project>{dd27c76c-6e3d-4ac2-a5fd-c28fd3299013}</Project>
+      <Name>Network.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
